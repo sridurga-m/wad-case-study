@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .background-img {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .ticket-section h2 {
+            text-align: center;
+            color: #333;
+        }
+        .ticket-section input, .ticket-section select, .ticket-section button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .ticket-section input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .ticket-section input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .ticket-section button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .ticket-section button:hover {
+            background-color: #c0392b;
+        }
+        #ticket-history {
+            margin-top: 20px;
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-img">
+    <div class="ticket-section">
+        <form id="ticket-form">
+            <h2>GO BUS</h2>
+            <input type="text" id="name" placeholder="Name" required><br>
+            <input type="number" id="age" placeholder="Age" required><br>
+            <input type="text" id="from" placeholder="From Location" required><br>
+            <input type="text" id="to" placeholder="To Location" required><br>
+            <label for="travel-date">Date of Travel:</label>
+            <input type="date" id="travel-date" required><br>
+            <label for="ac-type">AC or Non-AC:</label>
+            <select id="ac-type" required>
+                <option value="AC">AC</option>
+                <option value="Non-AC">Non-AC</option>
+            </select><br>
+            <label for="gender">Travels (Female or Male):</label>
+            <select id="gender" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+            </select><br>
+            <input type="submit" value="Book Ticket">
+        </form>
+        <button id="view-history-btn">View History</button>
+    </div>
+</div>
+
+<div id="ticket-history">
+    <h3>Ticket History</h3>
+    <table id="history-table">
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Seat No</th>
+                <th>Date of Booking</th>
+                <th>From Location</th>
+                <th>To Location</th>
+                <th>Date of Travel</th>
+                <th>AC/Non-AC</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="history-table-body"></tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById("ticket-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get form values
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        var travelDate = document.getElementById("travel-date").value;
+        var acType = document.getElementById("ac-type").value;
+        var gender = document.getElementById("gender").value;
+
+        // Redirect to available buses page with query parameters
+       window.location.href = 'availablebusses.html?name=' + encodeURIComponent(name) +
+                       '&age=' + encodeURIComponent(age) +
+                       '&from=' + encodeURIComponent(from) +
+                       '&to=' + encodeURIComponent(to) +
+                       '&travelDate=' + encodeURIComponent(travelDate) +
+                       '&acType=' + encodeURIComponent(acType) +
+                       '&gender=' + encodeURIComponent(gender);
+
+    });
+
+    document.getElementById("view-history-btn").addEventListener("click", function() {
+        document.getElementById("ticket-history").style.display = "block";
+    });
+</script>
+
+</body>
+</html>

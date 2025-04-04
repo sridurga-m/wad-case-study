@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Seat Selection</title>
+    <style>
+        .bus {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+        }
+        .seat, .driver {
+            width: 70px;
+            height: 70px;
+            background-color: lightgray;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .seat.available {
+            background-color: green;
+            color: white;
+        }
+        .seat.selected {
+            background-color: orange;
+            color: white;
+        }
+        .seat.female-booked {
+            background-color: pink;
+        }
+        .seat.male-booked {
+            background-color: blue;
+            color: white;
+        }
+        .driver {
+            background-color: yellow;
+            font-weight: bold;
+            cursor: default;
+        }
+        .empty-space {
+            visibility: hidden;
+        }
+        #confirm-seat {
+            font-size: 20px;
+            padding: 15px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+        #confirm-seat:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Select Your Seat</h2>
+    <div class="bus" id="bus">
+        <div class="empty-space"></div>
+        <div class="empty-space"></div>
+        <div class="empty-space"></div>
+        <div class="empty-space"></div>
+        <div class="driver">D</div>
+    </div>
+
+    <button id="confirm-seat" style="display:none;">Confirm Seat</button>
+
+    <script>
+        const bus = document.getElementById('bus');
+        let selectedSeat = null;
+
+        for (let i = 1; i <= 40; i++) {
+            const seat = document.createElement('div');
+            seat.classList.add('seat');
+            seat.innerText = i;
+
+            // Randomly decide if the seat is booked or available for demo
+            const isBooked = Math.random() > 0.5;
+            if (isBooked) {
+                const isFemale = Math.random() > 0.5;
+                seat.classList.add(isFemale ? 'female-booked' : 'male-booked');
+            } else {
+                seat.classList.add('available');
+            }
+
+            seat.addEventListener('click', () => {
+                if (seat.classList.contains('available')) {
+                    if (selectedSeat) {
+                        selectedSeat.classList.remove('selected');
+                    }
+                    selectedSeat = seat;
+                    seat.classList.add('selected');
+                    document.getElementById('confirm-seat').style.display = 'block'; // Show confirm button
+                }
+            });
+
+            if ((i - 1) % 4 === 2) {
+                const emptySpace = document.createElement('div');
+                emptySpace.classList.add('empty-space');
+                bus.appendChild(emptySpace);
+            }
+
+            bus.appendChild(seat);
+        }
+
+        // Confirm seat selection and redirect back to available buses page with seat number
+        document.getElementById('confirm-seat').addEventListener('click', function() {
+            if (selectedSeat) {
+                alert('Seat ' + selectedSeat.innerText + ' is confirmed.');
+                const name = new URLSearchParams(window.location.search).get('name');
+                const from = new URLSearchParams(window.location.search).get('from');
+                const to = new URLSearchParams(window.location.search).get('to');
+                const travelDate = new URLSearchParams(window.location.search).get('travelDate');
+                const acType = new URLSearchParams(window.location.search).get('acType');
+                window.location.href = 'availablebusses.html?seatConfirmed=' + encodeURIComponent(selectedSeat.innerText) +
+                                       '&name=' + encodeURIComponent(name) +
+                                       '&from=' + encodeURIComponent(from) +
+                                       '&to=' + encodeURIComponent(to) +
+                                       '&travelDate=' + encodeURIComponent(travelDate) +
+                                       '&acType=' + encodeURIComponent(acType);
+            }
+        });
+    </script>
+</body>
+</html>

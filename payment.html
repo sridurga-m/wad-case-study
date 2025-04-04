@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" type="text/css" href="sty.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script> <!-- QR Code library -->
+</head>
+<body>
+    <h2>Payment Page</h2>
+
+    <div id="payment-info"></div> <!-- Display payment info -->
+
+    <form id="payment-form">
+        <label for="payment-method">Select Payment Method:</label><br>
+        <select id="payment-method" required>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="UPI">UPI</option>
+        </select><br><br>
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" readonly><br><br>
+
+        <input type="submit" value="Generate QR">
+    </form>
+
+    <!-- QR Code will be generated here -->
+    <div id="qr-code-container" style="display:none;">
+        <h3>Scan this QR Code to Pay</h3>
+        <canvas id="qr-code"></canvas>
+        <br><br>
+
+        <!-- Payment details form for manual entry (e.g., Credit/Debit Card or UPI) -->
+        <div id="manual-details" style="display:none;">
+            <h3>Enter Payment Details</h3>
+            <label for="card-number">Card Number / UPI ID:</label><br>
+            <input type="text" id="payment-details" placeholder="Enter Card/UPI ID"><br><br>
+
+            <button id="complete-payment">Complete Payment</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve name, bus, and price from URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var name = urlParams.get('name');
+        var bus = urlParams.get('bus');
+        var price = urlParams.get('price');
+
+        // Display the retrieved info
+        document.getElementById('payment-info').innerHTML = "Hello, " + name + ". You selected " + bus + " bus.";
+        document.getElementById('amount').value = "₹" + price;
+
+        // Handle form submission to generate QR code
+        document.getElementById("payment-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var paymentMethod = document.getElementById("payment-method").value;
+            var paymentDetails = "Amount: ₹" + price + "\nPayment Method: " + paymentMethod;
+
+            // Show QR code container
+            document.getElementById("qr-code-container").style.display = "block";
+
+            // Generate QR code
+            var qr = new QRious({
+                element: document.getElementById('qr-code'),
+                size: 200,
+                value: paymentDetails
+            });
+
+            // Show manual payment entry form for card or UPI details
+            document.getElementById("manual-details").style.display = "block";
+        });
+
+        // Handle payment completion (example, no backend)
+        document.getElementById("complete-payment").addEventListener("click", function() {
+            var paymentDetails = document.getElementById("payment-details").value;
+            if (paymentDetails) {
+                alert("Payment completed successfully with " + paymentDetails);
+            } else {
+                alert("Please enter your card/UPI details.");
+            }
+        });
+    </script>
+</body>
+</html>

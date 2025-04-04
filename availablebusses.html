@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Buses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        #bus-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .bus-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .bus-item:hover {
+            transform: translateY(-5px);
+        }
+        .bus-item h3 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .bus-item p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .bus-item button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .bus-item button:hover {
+            opacity: 0.9;
+        }
+        .bus-item button:first-of-type {
+            background-color: #3498db;
+            color: white;
+        }
+        .bus-item button:last-of-type {
+            background-color: #e74c3c;
+            color: white;
+        }
+        #user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Available Buses</h2>
+    
+    <div id="user-info"></div>
+
+    <div id="bus-list">
+        <div class="bus-item ac-bus">
+            <h3>Morning Star - AC</h3>
+            <p>Departure Time: 10:00 AM</p>
+            <p>Price: ₹500</p>
+            <p>Seats Available: 5</p>
+            <button onclick="redirectToSeats()">Select Seats</button>
+            <button onclick="redirectToSnacks()">Book Snacks</button> <!-- New Book Snacks button -->
+            <button onclick="redirectToPayment('Morning Star', 500)">Book Now</button>
+        </div>
+        <div class="bus-item ac-bus">
+            <h3>Metro Luxury - AC</h3>
+            <p>Departure Time: 1:00 PM</p>
+            <p>Price: ₹500</p>
+            <p>Seats Available: 5</p>
+            <button onclick="redirectToSeats()">Select Seats</button>
+            <button onclick="redirectToSnacks()">Book Snacks</button> <!-- New Book Snacks button -->
+            <button onclick="redirectToPayment('Metro Luxury', 500)">Book Now</button>
+        </div>
+
+        <div class="bus-item non-ac-bus">
+            <h3>Bus Super Luxury - Non-AC</h3>
+            <p>Departure Time: 12:00 PM</p>
+            <p>Price: ₹350</p>
+            <p>Seats Available: 5</p>
+            <button onclick="redirectToSeats()">Select Seats</button>
+            <button onclick="redirectToSnacks()">Book Snacks</button> <!-- New Book Snacks button -->
+            <button onclick="redirectToPayment('Super Luxury', 350)">Book Now</button>
+        </div>
+        <div class="bus-item non-ac-bus">
+            <h3>PRL Bus - Non-AC</h3>
+            <p>Departure Time: 3:00 PM</p>
+            <p>Price: ₹350</p>
+            <p>Seats Available: 5</p>
+            <button onclick="redirectToSeats()">Select Seats</button>
+            <button onclick="redirectToSnacks()">Book Snacks</button> <!-- New Book Snacks button -->
+            <button onclick="redirectToPayment('PRL Bus', 350)">Book Now</button>
+        </div>
+    </div>
+
+    <script>
+    // Redirect to snacks page
+    function redirectToSnacks() {
+        window.location.href = 'snacks.html';  // Redirect to snacks page
+    }
+
+    // Redirect to seat selection page
+    function redirectToSeats() {
+        window.location.href = 'selectseats.html';
+    }
+
+    // Redirect to payment page with selected bus and price
+    function redirectToPayment(busName, price) {
+        window.location.href = 'payment.html?bus=' + encodeURIComponent(busName) + '&price=' + encodeURIComponent(price);
+    }
+</script>
+
+<!-- Example snack button inside the bus item -->
+<button onclick="redirectToSnacks()">Book Snacks</button>
+
+</body>
+</html>

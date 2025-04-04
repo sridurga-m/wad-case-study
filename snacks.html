@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snacks Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        #snack-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .snack-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .snack-item:hover {
+            transform: translateY(-5px);
+        }
+        .snack-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        .snack-item h3 {
+            color: #2c3e50;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .snack-item p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .snack-item button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .snack-item button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Book Your Snacks</h2>
+    
+    <div id="snack-list">
+        <!-- Chips Section -->
+        <div class="snack-item">
+            <img src="bluelays.png" alt="Lay's India's Magic Masala">
+            <h3>Lay's India's Magic Masala</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Lays's India's Magic Masala, 18)">Add to Cart</button>
+        </div>
+ <div class="snack-item">
+            <img src=" orangelays.png" alt="Lay's Hot N Sweet Chilli Potato Chips">
+            <h3>Lay's Hot N Sweet Chilli Potato Chips</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Lay's Hot N Sweet Chilli Potato Chips, 18)">Add to Cart</button>
+        </div>
+ <div class="snack-item">
+            <img src="lightgreenlays.png" alt="Lay's American Style Cream & Onion Chips">
+            <h3>Lay's American Style Cream & Onion Chips</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Lay's American Style Cream & Onion Chips, 18)">Add to Cart</button>
+        </div>
+ <div class="snack-item">
+            <img src="darkgreenlays.png" alt="Lay's Potato Chips-Chile Limon">
+            <h3>Lay's Potato Chips-Chile Limon</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Lay's Potato Chips-Chile Limon, 18)">Add to Cart</button>
+        </div>
+<div class="snack-item">
+            <img src="redlays.png" alt="Lay's Sizzling Hot Potato Chips">
+            <h3>Lay's Sizzling Hot Potato Chipss</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Lay's Sizzling Hot Potato Chips, 18)">Add to Cart</button>
+        </div>
+
+
+        <div class="snack-item">
+            <img src="madangles.png" alt="Bingo ! Mad Angles Mmmmm Masala Flavoured Corn-Based Triangle Chips Pack for Snacks">
+            <h3>Mad Angles Mmmmm Masala</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Bingo ! Mad Angles Mmmmm Masala Flavoured Corn-Based Triangle Chips Pack for Snacks', 18)">Add to Cart</button>
+        </div>
+
+        <!-- Soft Drinks Section -->
+        <div class="snack-item">
+            <img src="thumsup.png" alt="Thums Up Soft Drink Bottle">
+            <h3>Thums Up Soft Drink Bottle</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Thums Up Soft Drink Bottle', 18)">Add to Cart</button>
+        </div>
+        <div class="snack-item">
+            <img src="sprite.png" alt="Sprite Soft Drink Bottle">
+            <h3>Sprite Soft Drink Bottle</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Sprite Soft Drink Bottle', 18)">Add to Cart</button>
+        </div>
+        <div class="snack-item">
+            <img src="coke.png" alt="Coca-Cola Soft Drink ">
+            <h3>Coca-Cola Soft Drink</h3>
+            <p>₹18</p>
+            <button onclick="addToCart('Coca-Cola Soft Drink ', 18)">Add to Cart</button>
+        </div>
+
+        <!-- Biscuit Section -->
+        <div class="snack-item">
+            <img src="hideandseek.png" alt="Parle Chocolate, Hide and Seek Biscuit">
+            <h3>Parle Chocolate, Hide and Seek Biscuit</h3>
+            <p>₹28</p>
+            <button onclick="addToCart('Parle Chocolate, Hide and Seek Biscuit', 28)">Add to Cart</button>
+        </div>
+        <div class="snack-item">
+            <img src="bourbon.png" alt="Britannia The Original Bourbon - Creme Biscuit with Chocolate">
+            <h3>Britannia The Original Bourbon - Creme Biscuit with Chocolate</h3>
+            <p>₹8</p>
+            <button onclick="addToCart('Britannia The Original Bourbon - Creme Biscuit with Chocolate', 8)">Add to Cart</button>
+        </div>
+    </div>
+
+   <script>
+    // Function to add snacks to cart and redirect back to available buses page
+    function addToCart(itemName, itemPrice) {
+        alert(itemName + " has been added to the cart for ₹" + itemPrice);
+        window.location.href = 'availablebusses.html';  // Redirect back to available buses
+    }
+</script>
+
+<!-- Example snack item -->
+<button onclick="addToCart('Lays Chips', 18)">Add to Cart</button>
+
+</body>
+</html>

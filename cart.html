@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #cart-items {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .cart-item h3 {
+            margin: 0;
+        }
+        .cart-item p {
+            margin: 0;
+            color: #333;
+        }
+        .total {
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .checkout-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="total" id="total-amount"></div>
+    <button class="checkout-btn" onclick="redirectToPayment()">Proceed to Payment</button>
+
+    <script>
+        // Retrieve cart items from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartContainer = document.getElementById('cart-items');
+        let totalAmount = 0;
+
+        // Display cart items
+        cart.forEach(item => {
+            let cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('cart-item');
+            cartItemDiv.innerHTML = `<h3>${item.name}</h3><p>₹${item.price}</p>`;
+            cartContainer.appendChild(cartItemDiv);
+            totalAmount += item.price;
+        });
+
+        // Display total amount
+        document.getElementById('total-amount').innerHTML = "Total: ₹" + totalAmount;
+
+        // Store total amount in localStorage for payment page
+        localStorage.setItem('cartTotal', totalAmount);
+
+        // Redirect to payment page
+        function redirectToPayment() {
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>
